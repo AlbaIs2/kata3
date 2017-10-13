@@ -12,12 +12,13 @@ import org.jfree.ui.ApplicationFrame;
 
 
 public class HistogramDisplay extends ApplicationFrame{
+    private final Histogram <String> histogram ;
     
-    public HistogramDisplay(){
-        super( "HISTOGRAMA");
+    public HistogramDisplay (Histogram<String> histogram){
+        super("HISTOGRAMA");
+        this.histogram = histogram;
         setContentPane(createPanel());
-        pack();
-        
+        pack();  
     }
     public void  execute(){
         setVisible(true);
@@ -44,13 +45,15 @@ public class HistogramDisplay extends ApplicationFrame{
     
     private DefaultCategoryDataset createDataset(){
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-        dataSet.addValue(15,"",".ulpgc.es");
-        dataSet.addValue(7,"",".ull.es");
-        dataSet.addValue(10,"",".google.com");
-        dataSet.addValue(4,"",".hotmail.com");
+        for(String key :histogram.KeySet()){
+            dataSet.addValue(histogram.get(key),"",key);
+        }
         return dataSet;
+        
     
     }
+    
+    
 }
 
 
